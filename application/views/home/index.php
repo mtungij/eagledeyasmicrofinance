@@ -18,9 +18,11 @@
 	display: flex;
 	font-size: 16px;
 }
+
+
 </style> 
 <style> 
-body {background-image: url('<?php echo base_url(); ?>assets/img/back2.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%; } </style> <!-- WRAPPER --> 
+body {background-image: url('<?php echo base_url(); ?>assets/img/money.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%; } </style> <!-- WRAPPER --> 
 <div class="container"> <div class=""> <div class="">
  <br><br><br><br><br> <div class="">
   <div class="row"> 
@@ -33,8 +35,10 @@ body {background-image: url('<?php echo base_url(); ?>assets/img/back2.png'); ba
   			 
   			<div class="body"> 
   				<div class="text-center"> 
-  					<img src="<?php echo base_url() ?>assets/img/mikopo.png" style="width: 200px;height: 50px;">
+  					<img src="<?php echo base_url() ?>assets/img/eaglefino2.png" style="width: 200px;height: 50px;">
   				</div>
+
+				
   				<div class="">	
   				<div class="rows">
   					<div class="col-md-4">
