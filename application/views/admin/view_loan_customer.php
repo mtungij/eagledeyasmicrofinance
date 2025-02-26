@@ -158,42 +158,6 @@
                     </div>
                 </div>
 
-
-
-                <div class="col-lg-12">
-                    <div class="card">
-                          <div class="body">
-                            <div class="header">
-                              <h2>Local Government Information</h2>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover j-basic-example dataTable table-custom">
-                                    <thead class="thead-primary">
-                                        <tr>
-                                            
-                                            <th>Oficer Name</th>
-                                            <th>Phone Number</th>
-                                        </tr>
-                                    </thead>
-                                   
-                                    <tbody>
-                                        <?php $no = 1; ?>
-                                        
-                                        <tr>
-                                            <td><?php echo $local_oficer->oficer; ?> </td>
-                                            <td><?php echo $local_oficer->phone_oficer; ?></td>
-                                          </tr>
-                                    
-
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
                 <div class="col-lg-12">
                     <div class="card">
                           <div class="body">
@@ -209,7 +173,7 @@
                                     <th>Collateral Name</th>
                                     <th>Collateral Condition</th>
                                     <th>Collateral Current Value</th>
-                                    <th>Collateral Photo</th>
+                                    
                                         </tr>
                                     </thead>
                                    
@@ -221,7 +185,7 @@
                                             <td><?php echo $collaterals->description; ?> </td>
                                             <td><?php echo $collaterals->co_condition; ?></td>
                                             <td><?php echo number_format($collaterals->value); ?></td>
-                                            <td><img src="<?php echo base_url().'assets/img/'.$collaterals->file_name; ?>" class="img-thumbnail" style="width: 100px; height:100px;"></td>
+                                           
                                           </tr>
                                     <?php endforeach; ?>
 
@@ -234,7 +198,123 @@
                     </div>
                 </div>
                
+                <div class="col-lg-12">
+                    <div class="card">
+                          <div class="body">
+                            <div class="header">
+                            <h2>HISTORIA YA MIKOPO </h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover j-basic-example dataTable table-custom">
+                                    <thead class="thead-primary">
+                                        <tr>
+                                            
+                                    <th>S/No.</th>
+                                    <th>Loan Product</th>
+                                    <th>Principal</th>
+                                    <th>Principal + Interest</th>
+                                    <th>Duration type</th>
+                                    <!-- <th>Penalt Paid</th> -->
+                                    <th>Disbured Date</th>
+                                    <th>End Date</th>
+                                    <th>Last Payment</th>
+                                    <th>Credit Score</th>
+                                   
+                                        </tr>
+                                   
+                                   
+                                    <tbody>
+                                    <?php $no = 1; ?>
+<?php if (empty($loan_history)): ?>
+    <tr>
+        <td colspan="5">No loan history</td>
+    </tr>
+<?php else: ?>
+    <?php foreach ($loan_history as $history): ?>
+        <tr>
+            <td><?php echo $no++; ?>.</td>
+            <td><?php echo strtoupper($history->loan_name); ?></td>
+            <td><?php echo number_format($history->loan_aprove); ?></td>
+            <td><?php echo number_format($history->loan_int); ?></td>
 
+            <td>
+    <?php 
+    if ($history->day == 1) {
+        echo "Siku ({$history->session})";
+    } elseif ($history->day == 7) {
+        echo "Wiki ({$history->session})";
+    } elseif ($history->day == 30 || $history->day == 31 || $history->day == 29 || $history->day == 28) {
+        echo "Miezi ({$history->session})"; 
+    }
+    ?>
+</td>
+
+    <!-- </?php 
+    if (empty($history->receve_amount)) {
+        echo "<span class='badge badge-danger'>Ilisamehewa</span>"; // Badge with red color for "Not Paid"
+    } else {
+        echo number_format($history->receve_amount); // Format the amount with commas for readability
+    }
+    ?> -->
+
+
+
+
+            <td><?php echo $history->loan_stat_date; ?> </td>
+           <td><?php echo substr($history->loan_end_date, 0,10); ?></td> 
+           <td><?= $history->depost_day ?></td>
+
+           <td>
+    <?php 
+    $loan_end_date = strtotime(substr($history->loan_end_date, 0, 10)); // Convert to timestamp
+    $depost_day = strtotime($history->depost_day); // Convert to timestamp
+    $status = "Dabo";
+    $badge_class = "light"; // Default gray
+    $button_class = "btn-success"; // Default button
+    $text_color = "text-black"; // Set font color to black
+ 
+   $url = base_url("admin/view_customer_statemnt/{$history->loan_id}"); 
+
+ // Set URL
+
+    if ($depost_day == $loan_end_date) {
+        $status = "Imetimia vizuri"; // Achieved
+        $badge_class = "light"; 
+        $button_class = "btn-success"; // Green button
+    } elseif ($depost_day > $loan_end_date && ($depost_day - $loan_end_date) <= (15 * 86400)) {
+        $status = "Inaridhisha kiasi"; // Satisfactory
+        $badge_class = "light"; 
+        $button_class = "btn-warning"; // Yellow button
+    } elseif ($depost_day > $loan_end_date && ($depost_day - $loan_end_date) > (15 * 86400)) {
+        $status = "umecheleweshwa"; // Requires Improvement
+        $badge_class = "light"; 
+        $button_class = "btn-danger"; // Red button
+    }
+
+    echo "<a href='$url' class='btn $button_class $text_color'>
+            <i class='icon-eye'></i> Loan Score <span class='badge badge-$badge_class $text_color'>$status</span>
+          </a>";
+    ?>
+</td>
+
+
+
+
+
+       
+        </tr>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
 
                                 <div class="col-md-12">
                     <div class="card">
@@ -265,13 +345,13 @@
 </div>
 
 <div class="col-lg-4 form-group-sub">
-<label  class="form-control-label"><b style="color:red;">Charge Loan Penalty?</b></label>
- <select type="text" name="penat_status" class="form-control input-sm" required style="color: red; border-color: red;">
-    <option value="">Select Charge Loan Penalty</option>
-    <option value="YES">YES</option>
-    <option value="NO">NO</option>
- </select>
+    <label class="form-control-label"><b style="color:red;">Charge Loan Penalty?</b></label>
+    <select type="text" name="penat_status" class="form-control input-sm" required style="color: red; border-color: red;" disabled>
+        <option value="YES" selected>YES</option>
+        <option value="NO">NO</option>
+    </select>
 </div>
+
 
 
 

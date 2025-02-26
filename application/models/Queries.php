@@ -512,6 +512,17 @@ public function get_allcutomer($comp_id){
        }
 
 
+	   public function get_guarator_data($customer_id, $comp_id) {
+		$sponser = $this->db->query("
+			SELECT * FROM tbl_sponser 
+			WHERE customer_id = '$customer_id' 
+			AND comp_id = '$comp_id' 
+			ORDER BY created_at DESC 
+			LIMIT 1
+		");
+		return $sponser->row(); // Inarudisha rekodi moja pekee
+	}
+	
        public function get_loanform($customer_id,$comp_id){
        	$data = $this->db->query("SELECT * FROM tbl_loans l JOIN tbl_loan_category lc ON lc.category_id = l.category_id JOIN tbl_blanch b ON b.blanch_id = l.blanch_id JOIN tbl_customer c ON c.customer_id = l.customer_id JOIN tbl_group g ON g.group_id = l.group_id  WHERE l.customer_id = '$customer_id' AND l.comp_id = '$comp_id' ORDER BY l.loan_id DESC ");
        	return $data->row();
@@ -1636,10 +1647,12 @@ public function insert_localgov_details($data){
 	return $this->db->insert('tbl_attachment',$data);
 }
 
-public function get_colateral_data($loan_id){
-	$data = $this->db->query("SELECT * FROM tbl_collelateral WHERE loan_id = '$loan_id'");
-	  return $data->result();
+public function get_colateral_data($loan_id) {
+    $sql = "SELECT * FROM tbl_collelateral WHERE loan_id = ?";
+    $query = $this->db->query($sql, array($loan_id));
+    return $query->result(); // Returns an array of objects
 }
+
 
 
 public function update_collateral($data,$col_id){

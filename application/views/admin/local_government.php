@@ -61,7 +61,7 @@
                             <div class="card">
                                <div class="body">
             <div class="header">
-                <h2>Local government information & passport</h2>
+                <h2>Loan passport</h2>
                 <div class="pull-right">
                     <div class="row profile_state">
                     <?php if ($local_gov->cont_attachment == TRUE) {

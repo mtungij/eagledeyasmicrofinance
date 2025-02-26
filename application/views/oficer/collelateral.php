@@ -46,12 +46,18 @@
                             </div>
                             </div>
 
-                            <div class="col-lg-6">
-                            <div class="form-group">
-                              <span><?php echo $this->lang->line("value_collateral_menu") ?>:</span>
-                                <input type="number" class="form-control" id="" placeholder="<?php echo $this->lang->line("value_collateral_menu") ?>" name="value" autocomplete="off">
-                            </div>
-                            </div>
+<div class="col-lg-6">
+    <div class="form-group">
+        <span>Condition of Collateral:</span>
+        <select class="form-control" name="collateral_condition">
+        <option value="">select Condition:</option>
+            <option value="Inakidhi au kuzidi mahitaji ya mkopo">Inakidhi au kuzidi mahitaji ya mkopo</option>
+            <option value="Inaweza kupungua thamani kwa muda">Inaweza kupungua thamani kwa muda</option>
+            <option value="Haina thamani ya mkopo unaoombwa">Haina thamani ya mkopo unaoombwa</option>
+            <option value="Ni mbovu sio nzima">Ni mbovu sio nzima</option>
+        </select>
+    </div>
+</div>
 
                             <div class="col-lg-6">
                             <div class="form-group">

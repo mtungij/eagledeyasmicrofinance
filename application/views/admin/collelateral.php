@@ -39,26 +39,32 @@
                                 <input type="text" class="form-control" id="description" placeholder="Enter Name" name="description" autocomplete="off">
                             </div>
                             </div>
+                            
+                            <div class="col-lg-6">
+    <div class="form-group">
+        <span>Condition of Collateral:</span>
+        <select class="form-control" name="co_condition" requred>
+        <option value="">select Condition:</option>
+            <option value="Inakidhi au kuzidi mahitaji ya mkopo">Inakidhi au kuzidi mahitaji ya mkopo</option>
+            <option value="Inaweza kupungua thamani kwa muda">Inaweza kupungua thamani kwa muda</option>
+            <option value="Haina thamani ya mkopo unaoombwa">Haina thamani ya mkopo unaoombwa</option>
+            <option value="Ni mbovu sio nzima">Ni mbovu sio nzima</option>
+        </select>
+    </div>
+</div>
                             <div class="col-lg-6">
                             <div class="form-group">
-                              <span>Condition:</span>
-                                <input type="text" class="form-control" id="" placeholder="Enter Condition" name="co_condition" autocomplete="off">
-                            </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                            <div class="form-group">
-                              <span>Cullent colateral Value:</span>
+                              <span>Current Collateral Value:</span>
                                 <input type="number" class="form-control" id="" placeholder="Enter value" name="value" autocomplete="off">
                             </div>
                             </div>
 
-                            <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                             <div class="form-group">
                               <span>Attachment/picture:</span>
                                 <input type="file" class="form-control" id="attach" placeholder="Enter Middle name" name="file_name" autocomplete="off">
                             </div>
-                            </div>
+                            </div> -->
 
                             <input type="hidden" name="loan_id"  id="loan_id" value="<?php echo $loan_attach->loan_id; ?>">
                                
@@ -88,7 +94,6 @@
                                             <th>Colateral Name</th>
                                             <th>Colateral Condition</th>
                                             <th>Colateral Value</th>
-                                            <th>Colateral Picture</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -101,11 +106,7 @@
                                     <td><?php echo $collaterals->description; ?></td>
                                     <td><?php echo $collaterals->co_condition; ?></td>
                                     <td><?php echo number_format($collaterals->value); ?></td>
-                                    <td>
-                                        <div class="profile-image"><a href="" data-toggle="modal" data-target="#addcontact2<?php echo $collaterals->col_id; ?>"> <img src="<?php echo base_url().'assets/img/'.$collaterals->file_name; ?>" class="img-thumbnail" alt="Collateral image" style="width: 80px;height: 80px;"></a>
-                                      </div>
-                                       
-                                    </td>
+                                    
                                 <td>
                                       <a href="" class="btn btn-sm btn-icon btn-pure btn-primary on-default m-r-5 button-edit"
                                             data-toggle="modal" data-target="#addcontact1<?php echo $collaterals->col_id; ?>" data-original-title="Edit"><i class="icon-pencil"></i>

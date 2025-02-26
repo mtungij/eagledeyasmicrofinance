@@ -75,7 +75,7 @@
                           
 
                             <div class="content">
-                                <div class="text"><strong>GAWA MWEZI</strong></div>
+                                <div class="text"><strong>Monthly Loan Issued</strong></div>
                                 <h5 class="number"><?= number_format($total_loan_with) ?></h5>
                             </div>
                            
@@ -88,7 +88,7 @@
                         <div class="body">
                                 <div class="icon"><img src="https://www.wrraptheme.com/templates/lucid/html/assets/images/coin/ETH.svg" width="35" /></div>
                             <div class="content">
-                                <div class="text"><strong>RIBA YA MWEZI</strong></div>
+                                <div class="text"><strong>Monthly Interest</strong></div>
                                 <h5 class="number"><?= number_format($montly_interest)?></h5>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                         <div class="body">
                                 <div class="icon"><img src="https://www.wrraptheme.com/templates/lucid/html/assets/images/coin/XRP.svg" width="35" /></div>
                             <div class="content">
-                                <div class="text"><strong>GAWA MWEZI WATEJA</strong></div>
+                                <div class="text"><strong>Monthly Loan Clients</strong></div>
                                 <h5 class="number"><?= $customer_monthly ?></h5>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                                 <div class="icon"><img src="https://www.wrraptheme.com/templates/lucid/html/assets/images/coin/neo.svg" width="35" /></div>
                             <div class="content">
                            
-                                <div class="text"><strong>FAINI YA MWEZI</strong></div>
+                                <div class="text"><strong>Monthly Penalty</strong></div>
                                 <h5 class="number"><?= number_format($total_monthly_income->total_receved) ?></h5>
 
                             </div>
@@ -125,7 +125,7 @@
                         <div class="body">
                             <div class="icon"><img src="https://www.wrraptheme.com/templates/lucid/html/assets/images/coin/qtum.svg" width="35" /></div>
                             <div class="content">
-                                <div class="text"><strong>MAUZO YA LEO</strong></div>
+                                <div class="text"><strong>Expected  Collection Today</strong></div>
                                 <h5 class="number"><?= number_format($rejesho->total_rejesho)?></h5>
                             </div>
                         </div>                        
@@ -136,7 +136,7 @@
                         <div class="body">
                                 <div class="icon"><img src="https://www.wrraptheme.com/templates/lucid/html/assets/images/coin/stellar.svg" width="35" /></div>
                             <div class="content">
-                                <div class="text"><strong>MALAZO JUMLA</strong></div>
+                                <div class="text"><strong>Outstanding Loans</strong></div>
                                 <h5 class="number"><?= number_format($total_malazo) ?></h5>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                         <div class="body">
                                 <div class="icon"><img src="https://www.wrraptheme.com/templates/lucid/html/assets/images/coin/ETC.svg" width="35" /></div>
                             <div class="content">
-                                <div class="text"><strong>MIKOPO CHECHEFU</strong></div>
+                                <div class="text"><strong>Non-Performing Loans (NPL)</strong></div>
                                 <h5 class="number"><?= number_format($total_remain_amount) ?></h5>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                                 <div class="icon"><img src="https://www.wrraptheme.com/templates/lucid/html/assets/images/coin/XRP.svg" width="35" /></div>
                             <div class="content">
                             <?php $loan_out = $this->queries->get_total_outStandcomp($comp_id); ?>
-                                <div class="text"><strong>MADENI SUGU</strong></div>
+                                <div class="text"><strong>Bad Debts</strong></div>
                                 <h5 class="number"><?= number_format($loan_out->total_remain) ?></h5>
                             </div>
                         </div>
@@ -220,26 +220,26 @@
                  <div class="col-md-3 col-12">
                    <div class="card">
                         <div class="header">
-                            <h2>All Customer & Employee</h2>
+                            <h2>Clients and Employees</h2>
                         </div>
                         <div class="body">
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <td class="c">JUMLA YA WATEJA</td>
+                                        <td class="c">Total Clients</td>
                                         <td class="align-right"><span class="badge badge-success"><?php echo $all_customer->num_rows(); ?></span></td>
                                     </tr>
 
                                     <tr>
-                                        <td class="c">WANAUME</td>
+                                        <td class="c">Male</td>
                                         <td class="align-right"><span class="badge badge-info"><?php echo $all_male->num_rows(); ?></span></td>
                                     </tr>
                                     <tr>
-                                        <td class="c">WANAWAKE</td>
+                                        <td class="c">Female</td>
                                         <td class="align-right"><span class="badge badge-danger"><?php echo $all_female->num_rows(); ?></span></td>
                                     </tr>
                                     <tr>
-                                        <td class="c">WAFANYAKAZI</td>
+                                        <td class="c">Staff</td>
                                         <td class="align-right"><span class="badge badge-default"><?php echo $employee->num_rows(); ?></span></td>
                                     </tr>                              
                                 </tbody>
@@ -258,26 +258,26 @@
                     <div class="col-md-3 col-12">
                    <div class="card">
                         <div class="header">
-                            <h2>MALIPO YA LEO</h2>
+                            <h2>Payments for Today</h2>
                         </div>
                         <div class="body">
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <td class="c">KILA SIKU</td>
+                                        <td class="c">Daily loans</td>
                                         <td class="align-right"><span class="badge badge-warning"><?php echo number_format($deposit_daily->total_deposit); ?></span></td>
                                     </tr>
 
                                     <tr>
-                                        <td class="c">WIKI</td>
+                                        <td class="c">Weekly loans</td>
                                         <td class="align-right"><span class="badge badge-info"><?php echo number_format($depist_weekly->total_deposit_weekly + $depist_weekly->total_double_wekly); ?></span></td>
                                     </tr>
                                     <tr>
-                                        <td class="c">MWEZI</td>
+                                        <td class="c">Monthly Loans</td>
                                         <td class="align-right"><span class="badge badge-secondary"><?php echo number_format($deposit_monthly->total_deposit_monthly + $deposit_monthly->total_double_month); ?></span></td>
                                     </tr>
                                     <tr>
-                                        <td class="c"><b>JUMLA</b></td>
+                                        <td class="c"><b>TOTAL</b></td>
                                         <td class="align-right"><b><span class="badge badge-success"><?php echo number_format($all_deposit->total_deposit_all + $all_deposit->total_double_all); ?></span></b></td>
                                     </tr>                              
                                 </tbody>
@@ -297,26 +297,26 @@
                      <div class="col-md-3 col-12">
                    <div class="card">
                         <div class="header">
-                            <h2>MIKOPO ILIYOTOLEWA LEO</h2>
+                            <h2>Loans Disbursed Today</h2>
                         </div>
                         <div class="body">
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <td class="c">KILA SIKU</td>
+                                        <td class="c">Daily Loans</td>
                                         <td class="align-right"><span class="badge badge-warning"><?php echo number_format($loan_with_day->total_loanWith_day); ?></span></td>
                                     </tr>
 
                                     <tr>
-                                        <td class="c">WIKI</td>
+                                        <td class="c">Weekly Loans</td>
                                         <td class="align-right"><span class="badge badge-info"><?php echo number_format($loan_with_weekly->total_loanWith_weekly); ?></span></td>
                                     </tr>
                                     <tr>
-                                        <td class="c">MWEZI</td>
+                                        <td class="c">Monthly Loans</td>
                                         <td class="align-right"><span class="badge badge-secondary"><?php echo number_format($loan_with_monthy->total_loanWith_monthly); ?></span></td>
                                     </tr>
                                     <tr>
-                                        <td class="c"><b>JUMLA</b></td>
+                                        <td class="c"><b>TOTAL</b></td>
                                         <td class="align-right"><b><span class="badge badge-success"><?php echo number_format($ll_loanwith->total_loanWith_all); ?></span></b></td>
                                     </tr>                              
                                 </tbody>
@@ -335,26 +335,31 @@
                      <div class="col-md-3 col-12">
                    <div class="card">
                         <div class="header">
-                            <h2>FOMU NA MATUMIZI</h2>
+                            <h2>FEES & EXPENSES</h2>
                         </div>
                         <div class="body">
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <td class="c">FOMU</td>
+                                        <td class="c">FEES</td>
                                         <td class="align-right"><span class="badge badge-warning"><?php echo number_format($deducted_balance->total_deducted); ?></span></td>
                                     </tr>
 
                                     <tr>
-                                        <td class="c">FAINI</td>
-                                        <td class="align-right"><span class="badge badge-info"><?php echo number_format($non_balance->total_non); ?></span></td>
-                                    </tr>
+                                <td class="c"><a href="<?php echo base_url("admin/income_brachwise"); ?>" style="color: inherit; text-decoration: none;">PENALTIES</a></td>
+                                <td class="align-right">
+                                    <span class="badge badge-info">
+                                        <?php echo number_format($non_balance->total_non); ?>
+                                    </span>
+                                </td>
+                            </tr>
+
                                     <tr>
-                                        <td class="c"><b>JUMLA</b></td>
+                                        <td class="c"><b>TOTAL</b></td>
                                         <td class="align-right"><span class="badge badge-success"><?php echo number_format($deducted_balance->total_deducted + $non_balance->total_non); ?></span></td>
                                     </tr>
                                     <tr>
-                                        <td class="c">MATUMIZI</td>
+                                        <td class="c">Expenditures</td>
                                         <td class="align-right"><b><span class="badge badge-danger"><?php echo number_format($expenses->total_expenses); ?></span></b></td>
                                     </tr>                              
                                 </tbody>

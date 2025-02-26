@@ -36,7 +36,7 @@
                                     <thead class="thead-primary">
                                         <tr>
                                     <th>S/No.</th>
-                                    <th>Loan AC/No</th>
+                                    
                                     <th>customer name</th>
                                     <th>Phone Number</th>
                                     <!-- <th>Busines/Job Name</th> -->
@@ -46,6 +46,7 @@
                                     <th>Number of repayments</th>
                                     <th>Loan Status</th>
                                     <th>Customer Status</th>
+                                    <th>Loan Aggrement</th>
                                     <th>Action</th>
                                         </tr>
                                     </thead>
@@ -62,7 +63,7 @@
                                     ?>
                                               <tr>
                                     <td><?php echo $no++; ?>.</td>
-                                    <td><?php echo $loan_pendings->loan_code; ?></td>
+                                    
                                     <td><?php echo $loan_pendings->f_name; ?> <?php echo substr($loan_pendings->m_name, 0,1); ?> <?php echo $loan_pendings->l_name; ?></td>
                                     <td><?php echo $loan_pendings->phone_no; ?></td>
                                     <!-- <td><?php //echo $loan_pendings->bussiness_type; ?></td> -->
@@ -105,7 +106,15 @@
                                             <span class="badge badge-warning">Old Customer</span>
                                             <?php } ?>
                                                 
-                                            </td>   <td>
+                                            </td> 
+                                            <td>
+    <a href="<?php echo base_url("admin/view_aggrement/{$loan_pendings->customer_id}/{$loan_pendings->comp_id}"); ?>" target="_blank">
+        <button type="button" class="btn btn-primary">Print PDF</button>
+    </a>
+</td>
+
+                                            
+                                            <td>
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 
                 <div class="btn-group" role="group">
@@ -114,8 +123,6 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                     <a class="dropdown-item" href="<?php echo base_url("admin/view_Dataloan/{$loan_pendings->customer_id}/{$loan_pendings->comp_id}") ?>"><i class="icon-eye">view</i></a>
-                    
-                  <a class="dropdown-item" href="<?php echo base_url("admin/reject_loan/{$loan_pendings->loan_id}") ?>" onclick="return confirm('Are You Sure?')"><i class="icon-trash">Reject</i></a>
 
                      <a class="dropdown-item" href="<?php echo base_url("admin/delete_loan/{$loan_pendings->loan_id}") ?>" onclick="return confirm('Are you sure?')"><i class="icon-trash">Delete</i></a>
                     </div>

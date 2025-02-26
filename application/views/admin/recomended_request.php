@@ -41,7 +41,7 @@
                                                <th>Branch</th>
                                                 <th>Expenses</th>
                                                 <th>Amount</th>
-                                                <th>From Deduction Type</th>
+                                                <th>Account Type</th>
                                                 <th>Descrption </th>
                                                 <!-- <th>Comment</th> -->
                                                 <th>Date</th>
@@ -57,7 +57,7 @@
                                     <td><?php echo $datas->blanch_name; ?></td>
                                     <td><?php echo $datas->ex_name; ?></td>
                                     <td><?php echo number_format($datas->req_amount); ?></td>
-                                    <td><?php echo $datas->deduct_type; ?></td>
+                                    <td><?php echo $datas->account_name; ?></td>
                                     <td><?php echo $datas->req_description; ?></td>
                                     <!--  <td><?php //echo $datas->req_comment; ?></td> -->
                                      <td><?php echo $datas->req_date; ?></td>
