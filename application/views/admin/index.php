@@ -76,7 +76,9 @@
 
                             <div class="content">
                                 <div class="text"><strong>Monthly Loan Issued</strong></div>
-                                <h5 class="number"><?= number_format($total_loan_with) ?></h5>
+                                <h5 class="number" onclick="window.location.href='<?= base_url('admin/monthly_withdrawal') ?>';">
+                                <?= number_format($total_loan_with) ?>
+</h5>
                             </div>
                            
                         </div> 
@@ -89,7 +91,9 @@
                                 <div class="icon"><img src="https://www.wrraptheme.com/templates/lucid/html/assets/images/coin/ETH.svg" width="35" /></div>
                             <div class="content">
                                 <div class="text"><strong>Monthly Interest</strong></div>
-                                <h5 class="number"><?= number_format($montly_interest)?></h5>
+                                <h5 class="number" onclick="window.location.href='<?= base_url('admin/monthly_withdrawal') ?>';">
+                                <?= number_format($montly_interest)?>
+</h5>
                             </div>
                         </div>
                     </div>
@@ -101,7 +105,9 @@
                                 <div class="icon"><img src="https://www.wrraptheme.com/templates/lucid/html/assets/images/coin/XRP.svg" width="35" /></div>
                             <div class="content">
                                 <div class="text"><strong>Monthly Loan Clients</strong></div>
-                                <h5 class="number"><?= $customer_monthly ?></h5>
+                                <h5 class="number" onclick="window.location.href='<?= base_url('admin/monthly_withdrawal') ?>';">
+                                <?= $customer_monthly ?>
+</h5>
                             </div>
                         </div>
                         </a>
@@ -114,7 +120,10 @@
                             <div class="content">
                            
                                 <div class="text"><strong>Monthly Penalty</strong></div>
-                                <h5 class="number"><?= number_format($total_monthly_income->total_receved) ?></h5>
+                                <h5 class="number"></h5>
+                                <h5 class="number" onclick="window.location.href='<?= base_url('admin/monthly_income') ?>';">
+                                <?= number_format($total_monthly_income->total_receved) ?>
+</h5>
 
                             </div>
                         </div>
@@ -125,8 +134,13 @@
                         <div class="body">
                             <div class="icon"><img src="https://www.wrraptheme.com/templates/lucid/html/assets/images/coin/qtum.svg" width="35" /></div>
                             <div class="content">
-                                <div class="text"><strong>Expected  Collection Today</strong></div>
-                                <h5 class="number"><?= number_format($rejesho->total_rejesho)?></h5>
+                            <div class="text"><strong>Expected Collection Today</strong></div>
+                            <h5 class="number" onclick="window.location.href='<?= base_url('admin/today_recevable_loan') ?>';">
+    <?= number_format($rejesho->total_rejesho) ?>
+</h5>
+
+</h5>
+
                             </div>
                         </div>                        
                     </div>

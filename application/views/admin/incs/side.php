@@ -133,7 +133,15 @@
                 <div class="tab-pane" id="sub_menu">
                     <nav class="sidebar-nav">
                         <ul class="main-menu metismenu">
-                        	<li><a href="<?php echo base_url("admin/cash_transaction"); ?>"><i class="icon-wallet"></i>Cash Transaction</a></li>
+                        <li>
+                                <a href="#uiElements" class="has-arrow"><i class="icon-wallet"></i> <span>Payment report</span></a>
+                                <ul>
+                                    <li><a href="<?php echo base_url("admin/cash_transaction"); ?>">Daily Transactions</a></li>
+                                    <li><a href="<?php echo base_url("admin/teller_trasior"); ?>"">Branchwise Transactions</a></li>
+                                    
+                                </ul>
+                            </li>
+                            <!-- <li><a href="<//?php echo base_url("admin/daily_report"); ?>"><i class="icon-wallet"></i>Daily Report</a></li>    -->
                             <li>
                                 <a href="#uiElements" class="has-arrow"><i class="icon-wallet"></i> <span>Report za Mwezi</span></a>
                                 <ul>
@@ -151,8 +159,8 @@
                         	<li><a href="<?php echo base_url("admin/customer_account_statement"); ?>"><i class="icon-list"></i>Customer Account</a></li>
                         	<li><a href="<?php echo base_url("admin/today_recevable_loan"); ?>"><i class="icon-list"></i>Today Receivable</a></li>
                         	<li><a href="<?php echo base_url("admin/today_receved_loan"); ?>"><i class="icon-list"></i>Today Received</a></li>
-                        	<li><a href="javascript:;"><i class="icon-list"></i>Teller Officer Transaction</a></li>
-                        	<li><a href="javascript:;"><i class="icon-list"></i>Branch Officer Transaction</a></li>
+                        	<!-- <li><a href="javascript:;"><i class="icon-list"></i>Teller Officer Transaction</a></li>
+                        	<li><a href="javascript:;"><i class="icon-list"></i>Branch Officer Transaction</a></li> -->
                             <li>
                                 <a href="#uiElements" class="has-arrow"><i class="icon-wallet"></i> <span>Accounting Report</span></a>
                                 <ul>

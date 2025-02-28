@@ -28,8 +28,9 @@
                 <div class="col-lg-12">
                     <div class="card">
                          <div class="header">
-                            <h2>Today Receivable & Not Receivable</h2>
+                            <h2>Expected Collection</h2>
                             <div class="pull-right">
+                            <a href="<?php echo base_url("admin/branch_receivable"); ?>"  class="btn btn-warning">Branchwise</a>
                               <a href="" data-toggle="modal" data-target="#addcontact2" class="btn btn-primary"><i class="icon-calendar">Filter</i></a>
                             </div>    
                          </div>

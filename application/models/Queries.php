@@ -2077,6 +2077,23 @@ public function update_password_data($comp_id, $userdata)
     	return $today_recevable->result();
     }
 
+	public function get_today_branch_receivable_loan($comp_id) {
+		$today = date("Y-m-d");
+	
+		// Using query builder to join necessary tables and group by branch
+		$this->db->select('b.blanch_id, b.blanch_name, SUM(l.restration) as total_restration');
+		$this->db->from('tbl_loans l');
+		$this->db->join('tbl_blanch b', 'b.blanch_id = l.blanch_id', 'left');
+		$this->db->where('l.date_show', $today);
+		$this->db->where('l.loan_status', 'withdrawal');
+		$this->db->where('l.comp_id', $comp_id);
+		$this->db->where('l.dep_status', 'open');
+		$this->db->group_by('b.blanch_id'); // Grouping by branch to get total per branch
+	
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
    
     public function get_today_recevable_employee_data($empl_id,$comp_id){
     	$today = date("Y-m-d");

@@ -70,7 +70,7 @@ class Admin extends CI_Controller {
 
 
   // echo "<pre>";
-  //     print_r($total_remain_amount );
+  //     print_r( $rejesho );
   //             exit();
  
   
@@ -3524,8 +3524,7 @@ $this->db->query("INSERT INTO tbl_outstand (`comp_id`,`loan_id`,`blanch_id`,`loa
 	$this->form_validation->set_error_delimiters('<div class="text-danger">','</div>');
 	   if ($this->form_validation->run()) {
 	      $depost = $this->input->post();
-	      // print_r($depost);
-	      //     exit();
+      
 	      $customer_id = $depost['customer_id'];
 	      $comp_id = $depost['comp_id'];
 	      $blanch_id = $depost['blanch_id'];
@@ -3582,6 +3581,8 @@ $this->db->query("INSERT INTO tbl_outstand (`comp_id`,`loan_id`,`blanch_id`,`loa
 	      $customer_data = $this->queries->get_customerData($customer_id);
 		  $phones = $customer_data->phone_no;
 		  $full_name = $customer_data->f_name;
+      $middle_name = $customer_data->m_name;
+      $last_name = $customer_data->l_name;
 	      $admin_data = $this->queries->get_admin_role($comp_id);
 	      $remain_balance = $data_depost->balance;
 	      $old_balance = $remain_balance;
@@ -3979,26 +3980,51 @@ $this->db->query("INSERT INTO tbl_outstand (`comp_id`,`loan_id`,`blanch_id`,`loa
 	     $loan_int = $loan_restoration->loan_int;
 	     $remain_loan = $loan_int - $total_depost->remain_balance_loan;
 	        //sms send
-            $today = date("Y-m-d") ;
-         $date = date("d/m/Y");
-          $sms = 'Ndugu, '.$full_name. ' '. ' Umelipa TZS.' .number_format($new_balance). ' leo tarehe  ' . $date. ' ' . $comp_name.' Mpokeaji '.$role . ' bado unadaiwa kiasi cha TZS.'.$remain_loan;
+          $siku_baki = date("d-m-Y ", strtotime($days_remain->loan_end_date)); // Tarehe ya mwisho wa mkataba
+          $mkopo_tarehe = $days_remain->loan_stat_date; // Tarehe ya kuanza kwa mkopo
+          $today = date("Y-m-d");
+          $date = date("d/m/Y");
           
-          $massage = $sms;
-          $phone = $phones;
+          // Hesabu siku zilizobaki au zilizopita
+          $remain_days = (strtotime($siku_baki) - strtotime($today)) / (60 * 60 * 24);
+          
+          if ($remain_days == 0) {
+              // // Mteja amelipa siku ya mwisho ya mkataba
+              // $massage = 'Mpendwa '.$full_name.', tumepokea malipo yako ya Mbele ya TZS '.number_format($new_balance).
+              // '. Deni lako lililobaki kufikia leo tarehe '.$date.' ni TZS '.number_format($remain_loan).
+              // '. Leo ni siku ya mwisho wa mkataba wako - '.$comp_name.'.';
+
+              $massage = 'Ndugu '.$full_name.', malipo yako ya '.number_format($new_balance).' yamepokelewa '.$date.'. Mpokeaji: '.$role.'. Deni lako ni '.number_format($remain_loan).'. Tarehe ya leo ni siku ya mwisho wa mkataba wako - '.$comp_name.'.';
+
+            
+
+          } elseif ($remain_days > 0) {
+              // Mteja amelipa kabla ya mkataba kuisha
+              // $massage = 'Mpendwa '.$full_name.', tumepokea malipo yako ya TZS '.number_format($new_balance).
+              // ' tarehe '.$date.'. Deni lako lililobaki kufikia leo ni TZS '.number_format($remain_loan).'. '.
+              // 'Umebakiwa na siku '.$remain_days.' kabla ya mkataba kuisha tarehe '.date("d/m/Y", strtotime($siku_baki)).'. '.
+              // 'Asante kwa kufanya malipo - '.$comp_name.'.';
+
+$full_name = ucwords(strtolower($full_name));
+$middle_name = ucwords(strtolower($middle_name));
+$last_name = ucwords(strtolower($last_name));
+
+$massage = 'Ndugu ' . $full_name . ' ' . $middle_name . ' ' . $last_name . ', umelipa TSH ' . number_format($new_balance) . ' leo tarehe ' . $date . ' - ' . $comp_name . '. Mpokeaji: ' . $role . '. Deni ni TSH ' . number_format($remain_loan) . '.';
 
 
-          //    //sms send
-          // $sms = 'Umeingiza Tsh.' .$new_balance. ' kwenye Acc Yako ' . $loan_codeID . $comp_name.' Mpokeaji '.$role . ' Kiasi kilicho baki Kulipwa ni Tsh.'.$remain_loan.' Kwa malalamiko piga '.$comp_phone;
-          // $massage = $sms;
-          // $phone = $phones;
 
-	     // print_r($deni_lipa);
-	     //    exit();
-          // $phone = '255'.substr($phones, 1,10);
-          //   print_r($sms);
-          //     echo "<br>";
-          //   print_r($phone);
-          //        exit();
+          } else {
+              // Mdaiwa sugu - amelipa baada ya tarehe ya mwisho ya mkataba
+              // $massage = 'Mpendwa '.$full_name.', malipo yako ya TZS '.number_format($new_balance).
+              // ' yamepokelewa tarehe '.$date.'. Tafadhali fahamu kuwa umechelewa kulipa na sasa unahesabika kama mdaiwa sugu. '.
+              // 'Deni lako lililobaki ni TZS '.number_format($remain_loan).'. Tafadhali lipa haraka ili kuepuka hatua zaidi. - '.$comp_name.'.';
+
+              $massage = 'Ndugu '.$full_name.', umelipa '.number_format($new_balance).' leo '.$date.' - '.$comp_name.'. Mpokeaji: '.$role.'. Malipo yako yamechelewa. Lipa haraka TZS '.number_format($remain_loan).' kuepuka hatua zaidi.';
+
+
+             
+
+          }
           if ($company_data->sms_status == 'YES'){
            
              $this->sendsms($phone,$massage);
@@ -5326,6 +5352,24 @@ public function previous_transfor(){
 
     }
 
+    public function print_blanchwisereceivable()
+    {
+      $comp_id = $this->session->userdata('comp_id');
+    
+      // Load the queries model to fetch branch receivable data
+      $this->load->model('queries');
+      $branch_receivable = $this->queries->get_today_branch_receivable_loan($comp_id);
+      $compdata = $this->queries->get_companyData($comp_id);
+      $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8','format' => 'A4-L','orientation' => 'L']);
+      $html = $this->load->view('admin/branch_receivable_pdf',[ 'branch_receivable'=>$branch_receivable,'compdata'=>$compdata],true);
+      $mpdf->SetFooter('Generated By Brainsoft Technology');
+          $mpdf->WriteHTML($html);
+        //   echo "<pre>";
+	      // print_r($compdata);
+	      //       exit();
+          $mpdf->Output('Branchwise_Receivable_Report.pdf', 'I');
+    }
+
     public function previous_blanchwise_data(){
     	$this->load->model('queries');
     	$comp_id = $this->session->userdata('comp_id');
@@ -5349,7 +5393,7 @@ public function previous_transfor(){
 	    $total_receivable = $this->queries->get_blanchwise_Totalreceivable($from,$to,$comp_id);
 	    $total_receved = $this->queries->get_blanchwise_Totalreceved($from,$to,$comp_id);
     	$compdata = $this->queries->get_companyData($comp_id); 
-
+      
 	    $mpdf = new \Mpdf\Mpdf();
         $html = $this->load->view('admin/print_previous_blanchwise',['data_blanchwise'=>$data_blanchwise,'total_receivable'=>$total_receivable,'total_receved'=>$total_receved,'from'=>$from,'to'=>$to,'comp_id'=>$comp_id,'compdata'=>$compdata],true);
         $mpdf->SetFooter('Generated By Brainsoft Technology');
@@ -6922,7 +6966,7 @@ echo $this->queries->fetch_loancustomer($this->input->post('customer_id'));
         $first_name = $data_sms->f_name;
         $midle_name = $data_sms->m_name;
         $last_name = $data_sms->l_name;
-        $massage = 'Ndugu, ' .$first_name . ' ' .$midle_name . ' ' .$last_name . ' ' .'Umelipa faini ya Tsh.'. number_format($penart_paid) . ' '.$comp_name .' kwa msaada 0762178026';
+        $massage = 'Ndugu, ' .$first_name . ' ' .$midle_name . ' ' .$last_name . ' ' .'Umelipa faini ya Tsh.'. number_format($penart_paid) . ' '.$comp_name .'';
         
 			 // print_r($username);
 			 //     exit();
@@ -7191,11 +7235,17 @@ return true;
 		$employee = $this->queries->get_today_recevable_employee($comp_id);
 		$blanch = $this->queries->get_blanch($comp_id);
 		  //     echo "<pre>";
-		  // print_r($rejesho);
+		  // print_r($today_recevable);
 		  //           exit();
 		$this->load->view('admin/today_recevable',['today_recevable'=>$today_recevable,'rejesho'=>$rejesho,'employee'=>$employee,'blanch'=>$blanch]);
 	}
-
+public function branch_receivable()
+{
+  $this->load->model('queries');
+  $comp_id = $this->session->userdata('comp_id');
+   $branch_receivable = $this->queries->get_today_branch_receivable_loan($comp_id);
+   $this->load->view('admin/branch_receivable',['branch_receivable'=>$branch_receivable]);
+}
 
 	public function filter_loan_receivable(){
 		$this->load->model('queries');
@@ -10004,7 +10054,7 @@ public function sendsms($phone,$massage){
 	//public function sendsms(){f
 	//$phone = '255628323760';
 	//$massage = 'mapenzi yanauwa';
-	$api_key = 'ho4DkpIpcLEf1Zg55nO6Bde1WA';
+	$api_key = 'Su33xZCzIDPALbL4';
 	//$api_key = 'qFzd89PXu1e/DuwbwxOE5uUBn6';
 	//$curl = curl_init();
   $ch = curl_init();

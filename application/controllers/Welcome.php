@@ -383,14 +383,13 @@ class Welcome extends CI_Controller {
       	  //  $penart_value_data = @$penart_value_general->penart_value;
       	  //  }
 
-      	//   $today = date("Y-m-d 23:59");
-		$today = date("Y-m-d", strtotime("+1 day"));
-      	//   $today = date("Y-m-d");
+      	  $today = date("Y-m-d 23:59");
+      	  //$today = date("2023-02-16 23:59");
       	  @$loans = $this->queries->get_sum_depostLoan($loan_id);
       	  $depost_data = @$loans->depos;
       	  $rem = $totalloan - $depost_data;
-      	    //   print_r($depost_data);
-      	    //    exit();
+      	      // print_r($depost_data);
+      	      //  exit();
       	  //loan penart by samwel
       	   $penart_data = $loan_data->penat_status;
       	   $penart_status = $penart_data;
@@ -432,7 +431,7 @@ class Welcome extends CI_Controller {
                   	$this->update_loastatus_outstand($loan_id);
                   	$this->update_customer_status_out($customer_id);
                   	$this->update_recovery($loan_id);
-                    }elseif($depost_data === $totalloan){
+                    }elseif($depost_data >= $totalloan){
                     $this->update_loastatus($loan_id);
                     $this->insert_loan_kumaliza($comp_id,$blanch_id,$customer_id,$loan_id,$kumaliza,$group_id);
                     //$this->update_shedure_paid($loan_id);
@@ -789,9 +788,7 @@ public function send_reminder_auto_receivable($comp_id,$customer_id,$loan_id){
 	$last_name = $data_sms->l_name;
 
 	$restoration = $loan_restoration->restration;
-	$massage = 'Mpendwa Mteja, tunakukumbusha kulipa rejesho la Tsh ' . number_format($restoration) . 
-           ' kwa ' . $comp_name . ' kabla ya saa 10:30 jioni ili kuepuka faini ya ucheleweshaji';
-
+	$massage = 'Ndugu Mteja Unakumbushwa Kuleta Rejesho La Tsh.' .number_format($restoration) .' '. $comp_name .' '. 'Kabla ya Saa 11:00 Jioni Kuepuka Kupigwa faini ya Kuchelewesha.';
 	//    echo "<pre>";
 	// print_r($phone);
 	//      exit();
@@ -828,7 +825,7 @@ public function send_reminder_auto_pending($comp_id,$customer_id,$loan_id){
 	$last_name = $data_sms->l_name;
 
 	$restoration = $loan_restoration->restration;
-	$massage = ' Mteja Rejesho lako la leo Halijapokelewa '.' '. $comp_name .' '. 'Epuka Kuchajiwa  Faini Ya Kulaza Rejesho kwa Kutokulipa kwa Wakati Ahsante.';
+	$massage = 'Ndugu Mteja Rejesho lako la leo Halijapokelewa '.' '. $comp_name .' '. 'Epuka Kuchajiwa  Faini Ya Kulaza Rejesho kwa Kutokulipa kwa Wakati Ahsante.';
 	//    echo "<pre>";
 	// print_r($phone);
 	//      exit();
@@ -840,9 +837,9 @@ public function sendsms($phone,$massage){
 	//public function sendsms(){
 	//$phone = '255628323760';
 	//$massage = 'mapenzi yanauwa';
-	$api_key = 'ho4DkpIpcLEf1Zg55nO6Bde1WA';
+	$api_key = 'UYgMu5H8.rT98BjHoCeZvL/VJv';
   $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL,"https://galadove.loan-pocket.com/api/v1/receive/action/send/sms");
+  curl_setopt($ch, CURLOPT_URL,"https://galadove.mikoposoft.com/api/v1/receive/action/send/sms");
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS,
             'apiKey='.$api_key.'&phoneNumber='.$phone.'&messageContent='.$massage);
